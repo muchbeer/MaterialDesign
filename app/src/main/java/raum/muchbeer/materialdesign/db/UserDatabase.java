@@ -31,7 +31,7 @@ public abstract class UserDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             UserDatabase.class, "Gadiel.db")
                             .fallbackToDestructiveMigration()
-                            .addCallback(sRoomDatabaseCallback)
+                         //   .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
@@ -60,7 +60,7 @@ public abstract class UserDatabase extends RoomDatabase {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
                 UserDao dao = INSTANCE.userDao();
-                dao.deleteAllUsers();
+               // dao.deleteAllUsers();
 
                 User user = new User("muchbeer","Mwenge", "Shinyanga", image_name,
                                         "Ndio Shule ya kwanza kijana mtundu alianza kusoma");

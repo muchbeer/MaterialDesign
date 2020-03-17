@@ -24,6 +24,7 @@ import raum.muchbeer.materialdesign.ui.AddUserActivity;
 import raum.muchbeer.materialdesign.viewmodel.UserViewModel;
 import raum.muchbeer.materialdesign.viewmodel.ViewModelFactory;
 
+import static raum.muchbeer.materialdesign.ui.AddUserActivity.EXTRA_EDIT_POSITION;
 import static raum.muchbeer.materialdesign.ui.AddUserActivity.EXTRA_NEW_USER;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
             // addAndEditContacts(false, null, -1);
             Intent addNewSchool = new Intent(getApplicationContext(), AddUserActivity.class);
             String newUser = "new_user";
-            addNewSchool.putExtra(EXTRA_NEW_USER, newUser);
+            int position = -1;
+            addNewSchool.putExtra(EXTRA_EDIT_POSITION, position);
             startActivity(addNewSchool);
         });
 

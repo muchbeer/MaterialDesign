@@ -1,6 +1,8 @@
 package raum.muchbeer.materialdesign.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import raum.muchbeer.materialdesign.MainActivity;
 import raum.muchbeer.materialdesign.R;
 import raum.muchbeer.materialdesign.db.User;
+import raum.muchbeer.materialdesign.ui.AddUserActivity;
+
+import static raum.muchbeer.materialdesign.ui.AddUserActivity.EXTRA_EDIT_POSITION;
+import static raum.muchbeer.materialdesign.ui.AddUserActivity.EXTRA_EDIT_USER;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
+    private static final String LOG_TAG = UserAdapter.class.getSimpleName();
     private Context context;
     private ArrayList<User> userList;
     private MainActivity userActivity;
@@ -62,14 +69,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         Glide.with(context)
                 .setDefaultRequestOptions(defaultOptions)
-                .load(user.getUserDescription())
+               .load(user.getUserImage())
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
                 .into(((UserViewHolder)holder).userImage);
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), AddUserActivity.class);
+                intent.putExtra(EXTRA_EDIT_POSITION , position);
+                intent.putExtra(EXTRA_EDIT_USER, user);
+                view.getContext().startActivity(intent);
 
-            }
+                Log.d(LOG_TAG, "The unique ID is : " + position);
+          }
         });
     }
 
